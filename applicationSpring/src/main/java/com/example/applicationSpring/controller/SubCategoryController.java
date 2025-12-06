@@ -1,9 +1,12 @@
 package com.example.applicationSpring.controller;
 
 import com.example.applicationSpring.entity.CategoryEntity;
+import com.example.applicationSpring.entity.ProductEntity;
 import com.example.applicationSpring.entity.SubCategoryEntity;
 import com.example.applicationSpring.repository.CategoryRepository;
+import com.example.applicationSpring.repository.ProductRepository;
 import com.example.applicationSpring.repository.SubCategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,27 +17,38 @@ public class SubCategoryController {
 
     private final SubCategoryRepository subRepo;
     private final CategoryRepository categoryRepo;
+    private final ProductRepository productRepo;
 
-    public SubCategoryController(SubCategoryRepository subRepo, CategoryRepository categoryRepo) {
+    public SubCategoryController(SubCategoryRepository subRepo, CategoryRepository categoryRepo, ProductRepository productRepo) {
         this.subRepo = subRepo;
         this.categoryRepo = categoryRepo;
+        this.productRepo = productRepo;
     }
 
+    //get all
     @GetMapping
     public List<SubCategoryEntity> getAll() {
         return subRepo.findAll();
     }
 
+    //get by id
     @GetMapping("/{id}")
     public SubCategoryEntity getById(@PathVariable int id) {
         return subRepo.findById(id).orElse(null);
     }
 
-    @GetMapping("/byCategory/{catId}")
-    public List<SubCategoryEntity> getByCategory(@PathVariable int catId) {
-        return subRepo.findBycategory_id(catId);
+    //get category
+    @GetMapping("/category/{id}")
+    public CategoryEntity getByCategory(@PathVariable int id) {
+
+        SubCategoryEntity sub = subRepo.findById(id).orElse(null);
+        if (sub == null) {
+            return null;
+        }
+        return sub.getCategory();
     }
 
+    //add
     @PostMapping
     public SubCategoryEntity add(@RequestBody SubCategoryEntity sub) {
 
@@ -45,6 +59,8 @@ public class SubCategoryController {
 
         return subRepo.save(sub);
     }
+
+    //update
     @PutMapping("/{id}")
     public SubCategoryEntity update(
             @PathVariable int id,
@@ -66,16 +82,26 @@ public class SubCategoryController {
         return subRepo.save(existing);
     }
 
-
+    //delete
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    @Transactional
+    public String deleteSubCategory(@PathVariable int id) {
+
+        productRepo.deleteBySubCategoryId(id);
 
         boolean exists = subRepo.existsById(id);
         if (!exists) {
-            return "Subcategory not found";
+            return "SubCategory not found";
         }
 
         subRepo.deleteById(id);
-        return "Subcategory deleted successfully";
+
+        return "SubCategory and its products deleted successfully";
+    }
+
+    //get its product mapped to it
+    @GetMapping("/product/{id}")
+    public List<ProductEntity> getProductById(@PathVariable int id) {
+        return productRepo.findBySubCategoryId(id);
     }
 }

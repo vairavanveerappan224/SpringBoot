@@ -7,7 +7,7 @@ import java.util.List;
 public interface SubCategoryRepository
         extends JpaRepository<SubCategoryEntity, Integer> {
 
-    List<SubCategoryEntity> findBycategory_id(int categoryId);
+    List<SubCategoryEntity> findByCategoryId(int categoryId);
 
-    void deleteByCategory_id(int categoryId);
+    void deleteByCategoryId(int categoryId);
 }

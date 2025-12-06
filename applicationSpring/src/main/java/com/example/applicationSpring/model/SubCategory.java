@@ -1,31 +1,31 @@
 package com.example.applicationSpring.model;
 
 public class SubCategory {
-    private int sub_category_id;
-    private String sub_category_name;
+    private int id;
+    private String subCategoryName;
     private int category_id;
     public SubCategory() {}
-    public SubCategory(int sub_category_id, String sub_category_name, int category_id) {
-        this.sub_category_id = sub_category_id;
-        this.sub_category_name = sub_category_name;
+    public SubCategory(int Id, String subCategoryName, int category_id) {
+        this.id = id;
+        this.subCategoryName = subCategoryName;
         this.category_id = category_id;
 
     }
 
-    public int getSub_category_id() {
-        return sub_category_id;
+    public int getId() {
+        return id;
     }
 
-    public void setSub_category_id(int sub_category_id) {
-        this.sub_category_id = sub_category_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getSub_category_name() {
-        return sub_category_name;
+    public String getSubCategoryName() {
+        return subCategoryName;
     }
 
-    public void setSub_category_name(String sub_category_name) {
-        this.sub_category_name = sub_category_name;
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
     }
 
     public int getCategory_id() {

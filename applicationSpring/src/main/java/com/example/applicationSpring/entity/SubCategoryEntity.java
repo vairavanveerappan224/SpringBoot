@@ -2,8 +2,10 @@ package com.example.applicationSpring.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "application_sub_category")
+@Table(name = "appliance_sub_category")
 public class SubCategoryEntity {
 
     @Id
@@ -16,11 +18,14 @@ public class SubCategoryEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
-    public int getSubCategoryId() {
+    @OneToMany(mappedBy = "subCategory")
+    private List<ProductEntity> product;
+
+    public int getId() {
         return id;
     }
 
-    public void setSubCategoryId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

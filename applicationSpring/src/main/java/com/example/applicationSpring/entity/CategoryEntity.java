@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="application_category")
+@Table(name="appliance_category")
 public class CategoryEntity {
 
     @Id
