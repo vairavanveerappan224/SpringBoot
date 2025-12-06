@@ -34,14 +34,14 @@ public class CategoryController {
 
     @GetMapping("/sub/{id}")
     public List<SubCategoryEntity> getSubcategories(@PathVariable int id) {
-        return subRepo.findBycategory_id(id);
+        return subRepo.findByCategoryId(id);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public String deleteCategory(@PathVariable int id) {
 
-        subRepo.deleteByCategory_id(id);
+        subRepo.deleteByCategoryId(id);
 
         boolean exists = categoryRepo.existsById(id);
         if (!exists) {
