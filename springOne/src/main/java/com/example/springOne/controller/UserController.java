@@ -2,6 +2,7 @@ package com.example.springOne.controller;
 
 import com.example.springOne.entity.UserEntity;
 import com.example.springOne.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,11 +11,14 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+
     private final UserRepository userRepository;
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+
 
     // Custom load all users
     @GetMapping
