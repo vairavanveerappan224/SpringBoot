@@ -2,9 +2,15 @@ package com.example.applicationSpring.controller;
 
 import com.example.applicationSpring.entity.ProductEntity;
 import com.example.applicationSpring.entity.SubCategoryEntity;
+import com.example.applicationSpring.model.PaginationInfo;
 import com.example.applicationSpring.repository.ProductRepository;
 import com.example.applicationSpring.repository.SubCategoryRepository;
 import com.example.applicationSpring.response.ApiResponse;
+import com.example.applicationSpring.response.ProductPageResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,13 +34,17 @@ public class ProductController {
 
     //Product List
     @GetMapping
-    public ApiResponse<List<ProductEntity>> getProductsAll() {
+    public ApiResponse<ProductPageResponse> getProductsAll( @RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "5") int size,
+                                               @RequestParam(defaultValue = "id") String sortBy, @RequestParam(defaultValue = "false") boolean ascending ) {
+        Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size,sort);
+        Page<ProductEntity> list = productRepo.findAll(pageable);
+        PaginationInfo pagination=new PaginationInfo(list.getNumber(),list.getSize(),
+                list.getTotalElements(),list.getTotalPages());
+        ProductPageResponse response=new ProductPageResponse(list.getContent(),pagination);
 
-        List<ProductEntity> list=productRepo.findAll();
-        if(list==null){
-            return new ApiResponse<>(404,false,"List not found",null);
-        }
-        return new ApiResponse<>(200,true,"Product List",list);
+        return new ApiResponse<>(200,true,"Product List",response);
     }
 
     //Get by Id

@@ -1,10 +1,10 @@
 package com.example.applicationSpring.repository;
 
 import com.example.applicationSpring.entity.ProductEntity;
-import org.antlr.v4.runtime.atn.SemanticContext;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.List;
