@@ -1,11 +1,14 @@
 package com.example.applicationSpring.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name="product")
+@Table(name="appliance_product")
 public class ProductEntity {
 
     @Id
@@ -13,6 +16,10 @@ public class ProductEntity {
     private int id;
     private String productName;
     private Double price;
+
+    @CreationTimestamp
+    @Column(name = "time_stamp")
+    private LocalDateTime timeStamp;
 
     @ManyToOne
     @JoinColumn(name="sub_category_id")
@@ -54,4 +61,7 @@ public class ProductEntity {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+
+
 }
