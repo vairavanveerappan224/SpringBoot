@@ -1,0 +1,54 @@
+<!--    <!DOCTYPE html>-->
+<!--    <html xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--    <head>-->
+<!--    </head>-->
+<!--    <body>-->
+<!--    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">-->
+
+<!--        <h2 style="margin:0;">Edit User</h2>-->
+<!--        &lt;!&ndash; for edit page change title to Edit User &ndash;&gt;-->
+
+<!--        <a href="/users/list"-->
+<!--           style="padding:6px 12px;-->
+<!--                  background:#ddd;-->
+<!--                  color:#000;-->
+<!--                  text-decoration:none;-->
+<!--                  border-radius:4px;">-->
+<!--            ← Back-->
+<!--        </a>-->
+
+<!--    </div>-->
+
+
+<!--    <form th:action="@{/users/update}" method="post"  enctype="multipart/form-data" >-->
+
+<!--        <input type="hidden" name="id" th:value="${user.id}">-->
+
+<!--        <label>Name:</label><br>-->
+<!--        <input type="text" name="name" th:value="${user.name}"><br><br>-->
+<!--         <label> Email: </label><br>-->
+<!--        <input type="email" name="email" th:value="${user.email}"><br><br>-->
+<!--        <label>Password:</label><br>-->
+<!--        <input type="password" name="password"><br><br>-->
+<!--        <label>Phone:</label><br>-->
+<!--         <input type="text" name="phoneNo" th:value="${user.phoneNo}"><br><br>-->
+<!--        <label>User Type: </label><br>-->
+<!--        <input type="number" name="userType" th:value="${user.userType}"><br><br>-->
+<!--        <label>Image:</label><br>-->
+<!--        <input type="file" name="image"><br><br>-->
+
+<!--        &lt;!&ndash; optional: show current image &ndash;&gt;-->
+<!--        <img th:if="${user.imageFile != null}"-->
+<!--             th:src="@{'/images/' + ${user.imageFile}}"-->
+<!--             width="80">-->
+<!--        <label>Address: </label><br>-->
+<!--        <input type="text" name="address" th:value="${user.address}"><br><br>-->
+<!--        <label>Gender:</label><br>-->
+<!--         <input type="text" name="gender" th:value="${user.gender}"><br><br>-->
+<!--        <label>GST No: </label><br>-->
+<!--        <input type="text" name="gstNo" th:value="${user.gstNo}"><br><br>-->
+
+<!--        <button type="submit" style="color:white;padding:2px;border-radius:2px;background-color:blue;border-color:blue;">Update</button>-->
+<!--    </form>-->
+<!--    </body>-->
+<!--    </html>-->
